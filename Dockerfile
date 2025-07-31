@@ -14,7 +14,17 @@ WORKDIR /app
 COPY package.json .
 
 # عشان نسوي تحميل لكل الادوات الي جوا الباكيج
-RUN npm install
+# RUN npm install خلاص نمسح الجزء ونحط الي بعده مكتوب والسبب شرحناه بدروس قدام بتلقى شرحها
+# ARG NODE_ENV
+# RUN if ["$NODE_ENV" = "production"]; \
+#     then npm install --only=production; \
+#     else npm install; \
+#     fi       
+## اللحين هنشيل كل الي كتبناه من السطر ١٨ الي ٢٢ عشان نشترح الطريقه الثانيه
+RUN npm install 
+
+
+
 # بعد ما اسوي رن راح يتم انشاء النود مودول فولدر 
 
 # اللحين نبقي ننسخ كل الملفات الى الكونتينر
@@ -58,6 +68,7 @@ CMD [ "npm", "run", "start-dev" ]
 # docker rm <container-NAMES> حذف الكونتينر ولكن بحاله كانت الكونتينر متوقفه
 # docker rm <container-NAMES> -f حذف الكونتينر حتي لو كان شغال
 # docker kill <container-NAME> نفس الي فوقها
+# docker inspect <container-NAME> هيعرض لي كل المعلومات الي خاصه بالكونتينر
 
 
 

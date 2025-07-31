@@ -1,0 +1,12 @@
+version: "3"
+services:
+  node-app: 
+    build:
+      context: .
+      # args:
+      #    - NODE_ENV=production 
+      target: production ##  هنلغي الارجمينت واستخدمنا تارجيت لانه استخدمنا بالدوكر فايل اكثر من ستيج هنا نكتب الكلمه الي جنب كلمه أزز في الدوكر فايل
+
+    environment:
+      - NODE_ENV=production 
+    command: npm start
