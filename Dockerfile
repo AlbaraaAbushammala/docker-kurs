@@ -5,13 +5,13 @@
 # من ناحيه مكونات الدوكر فايل
 
 # اللحين بيحط لي نود جوا الكونتينر حقي
-FROM node:16
+# FROM node:16 ## كتبنا واحد جديد تحت 
 
 #لانشاء ملف جوا الدوكر عشان نحط فيه كامل الادوات المستخدمه
-WORKDIR /app
+# WORKDIR /app  ## كتبنا واحد جديد تحت 
 
 # هيك معناها انقل كل شي جوا الباكيج وحطه جوا الكونتينر الي هو آآب/ الي بندل عليها بعلامه النقطه
-COPY package.json .
+# COPY package.json .   ## كتبنا واحد جديد تحت 
 
 # عشان نسوي تحميل لكل الادوات الي جوا الباكيج
 # RUN npm install خلاص نمسح الجزء ونحط الي بعده مكتوب والسبب شرحناه بدروس قدام بتلقى شرحها
@@ -21,7 +21,7 @@ COPY package.json .
 #     else npm install; \
 #     fi       
 ## اللحين هنشيل كل الي كتبناه من السطر ١٨ الي ٢٢ عشان نشترح الطريقه الثانيه
-RUN npm install 
+# RUN npm install ## كتبنا واحد جديد تحت 
 
 
 
@@ -30,14 +30,15 @@ RUN npm install
 # اللحين نبقي ننسخ كل الملفات الى الكونتينر
 # COPY index.js .
 #او نقدر نستخدم هذا الكود لنسخ كل شي مره واحده
-COPY . .
+# COPY . . ## كتبنا واحد جديد تحت 
 
 # هنا نفهم الكونتينر انه على بورت شغال البرنامج
-EXPOSE 4000
+# EXPOSE 4000 ## كتبنا واحد جديد تحت 
 
 
 # اللحين نشغل الابلكيشن حقنا 
-CMD [ "npm", "run", "start-dev" ]
+# CMD [ "npm", "run", "start-dev" ] ## كتبنا واحد جديد تحت 
+
 
 # BEFHLE
 # docker build ./Dockerfile  عشان اسوي بييلد ويسوي لنا اميج للدكور فايل نتسخدم الكومت هذا واعطيه اسم الدوكر فايل لو حطيت نفطه بس بدون الاسم كامل
@@ -142,3 +143,27 @@ CMD [ "npm", "run", "start-dev" ]
 ## docker run --name express-node-app-container -v $(pwd)/src:/app/src:ro -d -p 4000:4000 express-node-app
 
 ## اليوم بنبدا بالدوكر كومبوز التكمله بتكون هناك
+
+
+
+
+## الحين بنعيد صياغه الدوكر فايل عشان اسويه لاكثر من ستيييج
+
+FROM node:16 as base
+
+
+FROM base as development
+WORKDIR /app  
+COPY package.json .   
+RUN npm install 
+COPY . . 
+EXPOSE 4000 
+CMD [ "npm", "run", "start-dev" ] 
+
+FROM base as production
+WORKDIR /app  
+COPY package.json .   
+RUN npm install  --only=production
+COPY . . 
+EXPOSE 4000 
+CMD [ "npm", "start" ] 
