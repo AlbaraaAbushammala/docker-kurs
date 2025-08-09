@@ -33,7 +33,7 @@ redisClient.on("connect ", () => console.log("connected to redis"));
 redisClient.connect();
 
 
-// connect db
+// connect mongo db
 const DB_USER = "root"
 const DB_PASSWORD = "example"
 const DB_PORT = 27017
@@ -41,6 +41,7 @@ const DB_HOST = "mongo"
 const URI = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}`
 mongoose.connect(URI).then(()=> console.log("connected to db...")).catch((err) => console.log(`failed to connect to db :`, err));
 
+// connect postgres db
 
 app.get('/', (req, res) => {
     redisClient.set('Products', 'products...');
