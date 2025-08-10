@@ -59,7 +59,7 @@ mongoose.connect(URI).then(()=> console.log("connected to Mongo db...")).catch((
 
 app.get('/', (req, res) => {
     redisClient.set('Products', 'products...');
-    res.send('<h1>Hello Albaraa sss</h1>')
+    res.send('<h1>Hello Albaraa SHam</h1>')
 });
 
 app.get('/data', async(req, res) => {
