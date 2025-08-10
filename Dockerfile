@@ -70,6 +70,12 @@
 # docker rm <container-NAMES> -f حذف الكونتينر حتي لو كان شغال
 # docker kill <container-NAME> نفس الي فوقها
 # docker inspect <container-NAME> هيعرض لي كل المعلومات الي خاصه بالكونتينر
+# docker network ls تعرض جميع الشبكات
+# docker volume ls تعرض جميع الفوليوم
+# docker volume rm تمسح فوليوم
+# cat > filename هذ معناه تنشي ملف وتدخل لتعديله بنفس الوقت
+# bash kevinnn آغلب طرق تعديل الكونتينرز
+
 
 
 
