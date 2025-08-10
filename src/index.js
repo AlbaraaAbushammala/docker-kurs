@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const redis = require('redis')
+const redis = require('redis');
+// const {Client} = require('pg'); // postgres
 
 // init app
 const PORT = process.env.PORT || 4000; // هيك معناه ي نستخدم ٤٠٠٠ كديفولت بورت او راح استخدم البورت الي برسله
@@ -29,7 +30,7 @@ const redisClient = redis.createClient({
     url: `redis://${REDIS_HOST}:${REDIS_PORT}`
 }) 
 redisClient.on("error", (err) => console.log("Redis Client Error", err));
-redisClient.on("connect ", () => console.log("connected to redis"));
+redisClient.on("connect", () => console.log("connected to redis"));
 redisClient.connect();
 
 
@@ -39,9 +40,22 @@ const DB_PASSWORD = "example"
 const DB_PORT = 27017
 const DB_HOST = "mongo"
 const URI = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}`
-mongoose.connect(URI).then(()=> console.log("connected to db...")).catch((err) => console.log(`failed to connect to db :`, err));
+mongoose.connect(URI).then(()=> console.log("connected to Mongo db...")).catch((err) => console.log(`failed to connect to db :`, err));
 
 // connect postgres db
+// const DB_USER = "root"
+// const DB_PASSWORD = "example"
+// const DB_PORT = 5432
+// const DB_HOST = "postgres"
+// const URI = `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}`;
+// const client = new Client({
+//     connectionString: URI,
+// })
+// client
+//     .connect()
+//     .then(()=> console.log("connected to db..."))
+//     .catch((err) => console.log(`failed to connect to db :`, err));
+
 
 app.get('/', (req, res) => {
     redisClient.set('Products', 'products...');
